@@ -6,3 +6,4 @@ __pycache__/
 *.out
 video_python/build/
 video_python/__pycache__/
+video_python/media/
