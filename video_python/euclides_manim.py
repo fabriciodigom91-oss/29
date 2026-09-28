@@ -3,22 +3,20 @@ Video animado (estilo Manim) del máximo común divisor con el algoritmo de Eucl
 
 Uso:  pip install manim edge-tts mutagen
       manim -qh euclides_manim.py Euclides
+
+La voz sale de voz.py: con GEMINI_API_KEY definida usa Gemini TTS; si no, edge-tts.
 """
 
-import asyncio
 import os
-import ssl
+import sys
 
-import edge_tts
-import edge_tts.communicate as ec
 from manim import *
-from mutagen.mp3 import MP3
 
-VOZ = "es-MX-DaliaNeural"
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import voz  # noqa: E402
+
 DIR = os.path.dirname(os.path.abspath(__file__))
-AUDIO = os.path.join(DIR, "build", "euclides")
-if os.path.exists("/root/.ccr/ca-bundle.crt"):
-    ec._SSL_CTX = ssl.create_default_context(cafile="/root/.ccr/ca-bundle.crt")
+AUDIO = os.path.join(DIR, "build", "euclides_" + voz.extension())
 
 NARRACION = [
     # 0
@@ -78,16 +76,16 @@ def code_line(texto):
 class Euclides(Scene):
     def preparar_audio(self):
         os.makedirs(AUDIO, exist_ok=True)
-        self.duraciones = []
+        print("Voz:", voz.motor())
+        self.audios, self.duraciones = [], []
         for i, texto in enumerate(NARRACION):
-            p = os.path.join(AUDIO, f"n{i:02d}.mp3")
-            if not os.path.exists(p) or os.path.getsize(p) == 0:
-                asyncio.run(edge_tts.Communicate(texto, VOZ).save(p))
-            self.duraciones.append(MP3(p).info.length)
+            ruta, dur = voz.narrar(texto, os.path.join(AUDIO, f"n{i:02d}"))
+            self.audios.append(ruta)
+            self.duraciones.append(dur)
 
     def narrar(self, i, *pasos):
         """Reproduce la narración i mientras corren las animaciones; espera a que termine la voz."""
-        self.add_sound(os.path.join(AUDIO, f"n{i:02d}.mp3"))
+        self.add_sound(self.audios[i])
         t0 = self.renderer.time
         for paso in pasos:
             if isinstance(paso, (int, float)):
