@@ -1,1 +1,3 @@
 render_frames/
+__pycache__/
+*.blend1
