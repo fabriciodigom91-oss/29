@@ -1,0 +1,109 @@
+% Cotización de servicios de clipping.
+% Cambia los datos entre corchetes [ ] y los precios, y compila con:
+%   pdflatex cotizacion_clipping.tex
+% o súbelo a overleaf.com.
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-noshorthands]{babel}
+\usepackage[a4paper,margin=2.2cm]{geometry}
+\usepackage{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage[table]{xcolor}
+\usepackage{tabularx,booktabs,array}
+\usepackage{tikz}
+
+\definecolor{principal}{HTML}{4B2A8C}
+\definecolor{suave}{HTML}{F1ECFA}
+\definecolor{gris}{HTML}{595959}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+% ---- Datos que debes cambiar ----
+\newcommand{\minombre}{[Tu nombre o marca]}
+\newcommand{\micontacto}{[WhatsApp] \quad·\quad [correo@ejemplo.com] \quad·\quad [@tu\_usuario]}
+\newcommand{\cliente}{[Nombre del creador o canal]}
+\newcommand{\folio}{COT-001}
+\newcommand{\fecha}{28 de septiembre de 2026}
+\newcommand{\vigencia}{15 días naturales}
+
+\begin{document}
+
+% Encabezado
+\begin{tikzpicture}[remember picture,overlay]
+  \fill[principal] (current page.north west) rectangle ([yshift=-3.2cm]current page.north east);
+  \node[anchor=west,text=white,font=\bfseries\huge] at ([xshift=2.2cm,yshift=-1.3cm]current page.north west) {\minombre};
+  \node[anchor=west,text=white,font=\small] at ([xshift=2.2cm,yshift=-2.2cm]current page.north west) {Edición de clips para YouTube Shorts, TikTok e Instagram Reels};
+\end{tikzpicture}
+\vspace*{2.3cm}
+
+{\color{principal}\Large\bfseries COTIZACIÓN}\hfill
+\begin{tabular}[t]{@{}r l@{}}
+  \textbf{Folio:} & \folio \\
+  \textbf{Fecha:} & \fecha \\
+  \textbf{Vigencia:} & \vigencia
+\end{tabular}
+
+\vspace{0.6cm}
+\textbf{Para:} \cliente
+
+\vspace{0.4cm}
+Gracias por tu interés. Te propongo convertir tus streams, podcasts o videos largos en clips cortos y
+verticales, listos para publicarse, con el objetivo de atraer nuevos seguidores a tu canal principal.
+
+\vspace{0.5cm}
+{\color{principal}\large\bfseries Paquetes mensuales}
+\vspace{0.2cm}
+
+\renewcommand{\arraystretch}{1.5}
+\begin{tabularx}{\textwidth}{@{} l X r @{}}
+  \toprule
+  \textbf{Paquete} & \textbf{Qué incluye} & \textbf{Precio mensual} \\
+  \midrule
+  Básico   & 15 clips al mes · subtítulos animados · formato vertical 9:16 & \$3,000 MXN \\
+  \rowcolor{suave}
+  Estándar & 30 clips al mes · subtítulos animados · gancho en los primeros 3 segundos · títulos y descripciones & \$6,000 MXN \\
+  Pro      & 60 clips al mes · todo lo del Estándar · miniaturas · publicación programada · reporte mensual de vistas & \$11,000 MXN \\
+  \bottomrule
+\end{tabularx}
+
+\vspace{0.6cm}
+{\color{principal}\large\bfseries Resumen del paquete elegido}
+\vspace{0.2cm}
+
+\begin{tabularx}{\textwidth}{@{} X r @{}}
+  \toprule
+  Paquete Estándar (30 clips) — 1 mes & \$6,000.00 \\
+  Descuento por contratar 3 meses (10\,\%) & $-$\$600.00 \\
+  \midrule
+  \textbf{Total mensual} & \textbf{\$5,400.00 MXN} \\
+  \bottomrule
+\end{tabularx}
+
+{\small\color{gris} Precios en pesos mexicanos. Si necesitas factura, se agrega el IVA correspondiente.}
+
+\vspace{0.6cm}
+{\color{principal}\large\bfseries Cómo trabajamos}
+\begin{enumerate}
+  \item Me compartes los enlaces a tus videos o streams (o el archivo original).
+  \item Selecciono los mejores momentos y te envío los clips en un máximo de 48 horas.
+  \item Incluye hasta 1 ronda de cambios por clip.
+  \item El pago es por adelantado al inicio de cada mes (transferencia o PayPal).
+\end{enumerate}
+
+\vspace{0.3cm}
+{\color{principal}\large\bfseries Condiciones}
+\begin{itemize}
+  \item Los clips se hacen solo con contenido del que tú tienes los derechos o autorización.
+  \item Los clips no utilizados en el mes no se acumulan para el siguiente.
+  \item Puedes cancelar avisando con 15 días de anticipación.
+\end{itemize}
+
+\vfill
+\begin{center}
+  \rule{0.4\textwidth}{0.4pt}\\[2pt]
+  \minombre\\[2pt]
+  {\small\color{gris}\micontacto}
+\end{center}
+
+\end{document}
